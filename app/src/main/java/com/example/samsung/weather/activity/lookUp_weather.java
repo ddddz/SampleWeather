@@ -21,6 +21,7 @@ public class lookUp_weather extends AppCompatActivity {
 
     private Button submit;
     private TextView input;
+    private SharedPreferences sharedPreferences;
 
     private boolean isFromWeather;
     private final String urlName="http://op.juhe.cn/onebox/weather/query";//appkey
@@ -29,7 +30,7 @@ public class lookUp_weather extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         isFromWeather = getIntent().getBooleanExtra("is_from_weather", false);
         if(sharedPreferences.getBoolean("city_selected", false) && !isFromWeather){
             Intent intent = new Intent(lookUp_weather.this, weatherActivity.class);
