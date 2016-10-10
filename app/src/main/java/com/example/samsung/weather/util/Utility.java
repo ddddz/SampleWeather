@@ -24,7 +24,7 @@ public class Utility {
             JSONObject result = jsonObject.getJSONObject("result").getJSONObject("data");
             String cityName = result.getJSONObject("realtime").getString("city_name");
             String publishTime = result.getJSONObject("realtime").getString("time");
-            String temp = result.getJSONObject("realtime").getJSONObject("weather").getString("temperature");
+            String temp = result.getJSONObject("realtime").getJSONObject("weather").getString("temperature") + "°";
             String weatherInfo = result.getJSONObject("realtime").getJSONObject("weather").getString("info");
             saveWeather(context, cityName, publishTime, temp, weatherInfo);
         } catch (JSONException e){
@@ -42,7 +42,7 @@ public class Utility {
         editor.putBoolean("has_loaded", true);
         editor.putString("city_name", cityName);
         editor.putString("publish_time", currentTime());
-        editor.putString("temp", temp);
+        editor.putString("temp", temp );
         editor.putString("weather_info", weatherInfo);
 //        editor.putString("current_data", strTimeFormat);
 //        Log.i("what", strTimeFormat);
@@ -64,8 +64,8 @@ public class Utility {
             minute = String.valueOf(calendar.get(Calendar.MINUTE));
         }
 
-        return calendar.get(Calendar.YEAR) + "-" + month + "-" + calendar.get(Calendar.DATE) + "  "
-                + hour + ":" + minute;
+        return "于 " + calendar.get(Calendar.YEAR) + "-" + month + "-" + calendar.get(Calendar.DATE) + "  "
+                + hour + ":" + minute + " 更新";
     }
 
 }

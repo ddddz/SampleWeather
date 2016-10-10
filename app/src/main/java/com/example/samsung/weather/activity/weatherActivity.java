@@ -1,12 +1,14 @@
 package com.example.samsung.weather.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +23,7 @@ import java.util.Calendar;
 /**
  * Created by samsung on 2016/10/6.
  */
-public class weatherActivity extends AppCompatActivity implements View.OnClickListener{
+public class weatherActivity extends Activity implements View.OnClickListener{
 
     private Calendar calendar;
     private String Url;
@@ -43,7 +45,10 @@ public class weatherActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.weather_main);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         intent = getIntent();
         if(sharedPreferences.getBoolean("has_loaded", false) && !intent.getBooleanExtra("is_from_look", false)){
@@ -53,6 +58,7 @@ public class weatherActivity extends AppCompatActivity implements View.OnClickLi
             Url = intent.getStringExtra("city_url");
         }
         getWeather(Url);
+        setContentView(R.layout.weather_main);
         titleWeatherCity = (TextView) findViewById(R.id.titleWeatherCity);
         refreshTime = (TextView) findViewById(R.id.refreshTime);
         weatherInfo = (TextView) findViewById(R.id.weatherInfo);

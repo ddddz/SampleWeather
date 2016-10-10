@@ -1,12 +1,14 @@
 package com.example.samsung.weather.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,7 +19,7 @@ import java.net.URLEncoder;
 /**
  * Created by samsung on 2016/10/6.
  */
-public class lookUp_weather extends AppCompatActivity {
+public class lookUp_weather extends Activity {
 
     private Button submit;
     private TextView input;
@@ -30,6 +32,9 @@ public class lookUp_weather extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         isFromWeather = getIntent().getBooleanExtra("is_from_weather", false);
         if(sharedPreferences.getBoolean("city_selected", false) && !isFromWeather){

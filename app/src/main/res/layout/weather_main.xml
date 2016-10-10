@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/weather">
 
     <RelativeLayout
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="100dp">
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:background="@null"/>
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"/>
 
         <TextView
             android:id="@+id/titleWeatherCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:gravity="center"
-            android:textSize="44sp"/>
+            android:textSize="45sp"
+            android:layout_marginTop="45dp"/>
 
     </RelativeLayout>
 
@@ -21,23 +39,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/refreshTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="111"
-            android:textSize="20sp"
-            android:layout_marginLeft="30dp" />
+
 
         <TextView
             android:id="@+id/weatherInfo"
-            android:layout_below="@id/refreshTime"
             android:gravity="center"
-            android:text="qing"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="60sp"/>
+            android:textSize="30sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#fff"/>
 
         <TextView
             android:id="@+id/temperature"
@@ -45,25 +56,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/weatherInfo"
             android:gravity="center"
-            android:layout_marginTop="15dp"
-            android:text="23121"
-            android:textSize="30sp"/>
+            android:layout_marginTop="25dp"
+            android:textColor="#fff"
+            android:textSize="70sp"/>
 
+        <TextView
+            android:id="@+id/refreshTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="230dp"
+            android:layout_marginTop="175dp"
+            android:textColor="#fff"/>
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search"
-        android:layout_below="@id/temperature"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"/>
 
-    <Button
-        android:id="@+id/refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="refresh"/>
 </LinearLayout>
