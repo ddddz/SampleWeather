@@ -23,8 +23,8 @@ public class lookUp_weather extends AppCompatActivity {
     private TextView input;
 
     private boolean isFromWeather;
-    private String urlName="http://op.juhe.cn/onebox/weather/query";//appkey
-    private String keys = "bc5bc07176469e357fc53e1682c4112b";
+    private final String urlName="http://op.juhe.cn/onebox/weather/query";//appkey
+    private final String keys = "bc5bc07176469e357fc53e1682c4112b";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

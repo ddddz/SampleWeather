@@ -59,4 +59,11 @@
         android:layout_below="@id/temperature"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="refresh"/>
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,8 +27,9 @@ public class weatherActivity extends AppCompatActivity implements View.OnClickLi
     private TextView weatherInfo;
     private TextView temperature;
     private Button search;
-    private String urlName="http://op.juhe.cn/onebox/weather/query";//appkey
-    private String keys = "bc5bc07176469e357fc53e1682c4112b";
+    private Button refresh;
+    private final String urlName="http://op.juhe.cn/onebox/weather/query";//appkey
+    private final String keys = "bc5bc07176469e357fc53e1682c4112b";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -47,7 +49,9 @@ public class weatherActivity extends AppCompatActivity implements View.OnClickLi
         weatherInfo = (TextView) findViewById(R.id.weatherInfo);
         temperature = (TextView) findViewById(R.id.temperature);
         search = (Button) findViewById(R.id.search);
+        refresh = (Button) findViewById(R.id.refresh);
         search.setOnClickListener(this);
+        refresh.setOnClickListener(this);
 
 //        getWeather(Url);
 
@@ -61,6 +65,10 @@ public class weatherActivity extends AppCompatActivity implements View.OnClickLi
                 intent.putExtra("is_from_weather", true);
                 startActivity(intent);
                 break;
+            case R.id.refresh:
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weatherActivity.this);
+                getWeather(lookUp_weather.code(sharedPreferences.getString("city_name", ""), urlName, keys));
+                Log.i("refresh_weather", sharedPreferences.getString("weather_info", ""));
             default:
                 break;
         }
