@@ -16,12 +16,17 @@ import com.example.samsung.weather.util.HttpCallBackListener;
 import com.example.samsung.weather.util.HttpUtil;
 import com.example.samsung.weather.util.Utility;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 /**
  * Created by samsung on 2016/10/6.
  */
 public class weatherActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private Calendar calendar;
     private String Url;
+    private String hour, month, minute;
     private TextView titleWeatherCity;
     private TextView refreshTime;
     private TextView weatherInfo;
@@ -102,9 +107,28 @@ public class weatherActivity extends AppCompatActivity implements View.OnClickLi
     private void showWeather(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(weatherActivity.this);
         titleWeatherCity.setText(sharedPreferences.getString("city_name", ""));
-        refreshTime.setText(sharedPreferences.getString("publish_time", ""));
+        refreshTime.setText(currentTime());
         weatherInfo.setText(sharedPreferences.getString("weather_info", ""));
         temperature.setText(sharedPreferences.getString("temp", ""));
+    }
+
+    private String currentTime(){
+        calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        if(calendar.get(Calendar.AM_PM) == 0){
+            hour = String.valueOf(calendar.get(Calendar.HOUR));
+        } else {
+            hour = String.valueOf(calendar.get(Calendar.HOUR) + 12);
+        }
+        month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
+        if(calendar.get(Calendar.MINUTE) < 10){
+            minute = 0 + String.valueOf(calendar.get(Calendar.MINUTE));
+        } else {
+            minute = String.valueOf(calendar.get(Calendar.MINUTE));
+        }
+
+        return calendar.get(Calendar.YEAR) + "-" + month + "-" + calendar.get(Calendar.DATE) + "  "
+                + hour + ":" + minute;
     }
 
 }
