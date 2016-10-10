@@ -47,6 +47,7 @@ public class lookUp_weather extends AppCompatActivity {
                 Log.i("look_up", city);
                 String Url = code(city, urlName, keys);
                 Intent weatherActivity = new Intent(lookUp_weather.this, weatherActivity.class);
+                weatherActivity.putExtra("is_from_look", true);
                 weatherActivity.putExtra("city_url", Url);
                 startActivity(weatherActivity);
                 finish();
@@ -54,7 +55,7 @@ public class lookUp_weather extends AppCompatActivity {
         });
     }
 
-    private String code(String city, String urlname, String key){
+    public static String code(String city, String urlname, String key){
         StringBuilder builder = new StringBuilder();
         try{
             builder.append(urlname).append("?cityname=").append(URLEncoder.encode(city, "UTF-8")).append("&").append("key=").append(key);

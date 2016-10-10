@@ -20,22 +20,28 @@ import com.example.samsung.weather.util.Utility;
  */
 public class weatherActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private String Url;
     private TextView titleWeatherCity;
     private TextView refreshTime;
     private TextView weatherInfo;
     private TextView temperature;
     private Button search;
+    private String urlName="http://op.juhe.cn/onebox/weather/query";//appkey
+    private String keys = "bc5bc07176469e357fc53e1682c4112b";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_main);
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        if(sharedPreferences.getBoolean("has_loaded", false)){
-//            showWeather();
-//        }
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Intent intent = getIntent();
-        String Url = intent.getStringExtra("city_url");
+        if(sharedPreferences.getBoolean("has_loaded", false) && !intent.getBooleanExtra("is_from_look", false)){
+            Url = lookUp_weather.code(sharedPreferences.getString("city_name", ""), urlName, keys);
+
+        } else {
+            Url = intent.getStringExtra("city_url");
+        }
+        getWeather(Url);
         titleWeatherCity = (TextView) findViewById(R.id.titleWeatherCity);
         refreshTime = (TextView) findViewById(R.id.refreshTime);
         weatherInfo = (TextView) findViewById(R.id.weatherInfo);
@@ -43,7 +49,7 @@ public class weatherActivity extends AppCompatActivity implements View.OnClickLi
         search = (Button) findViewById(R.id.search);
         search.setOnClickListener(this);
 
-        getWeather(Url);
+//        getWeather(Url);
 
     }
 
@@ -51,9 +57,9 @@ public class weatherActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v){
         switch (v.getId()){
             case R.id.search:
-                Intent ser = new Intent(weatherActivity.this, lookUp_weather.class);
-                ser.putExtra("is_from_weather", true);
-                startActivity(ser);
+                Intent intent = new Intent(weatherActivity.this, lookUp_weather.class);
+                intent.putExtra("is_from_weather", true);
+                startActivity(intent);
                 break;
             default:
                 break;
