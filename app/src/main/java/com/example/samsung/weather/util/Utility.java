@@ -64,8 +64,8 @@ public class Utility {
             minute = String.valueOf(calendar.get(Calendar.MINUTE));
         }
 
-        return "于 " + calendar.get(Calendar.YEAR) + "-" + month + "-" + calendar.get(Calendar.DATE) + "  "
-                + hour + ":" + minute + " 更新";
+        return "已更新 " + calendar.get(Calendar.YEAR) + "-" + month + "-" + calendar.get(Calendar.DATE) + " "
+                + hour + ":" + minute;
     }
 
 }

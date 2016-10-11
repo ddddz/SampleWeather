@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.samsung.weather.R;
+import com.example.samsung.weather.service.AutoUpdateWeather;
 import com.example.samsung.weather.util.HttpCallBackListener;
 import com.example.samsung.weather.util.HttpUtil;
 import com.example.samsung.weather.util.Utility;
@@ -53,6 +54,8 @@ public class weatherActivity extends Activity implements View.OnClickListener{
         intent = getIntent();
         if(sharedPreferences.getBoolean("has_loaded", false) && !intent.getBooleanExtra("is_from_look", false)){
             Url = lookUp_weather.code(sharedPreferences.getString("city_name", ""), urlName, keys);
+            sharedPreferences.edit().putString("city_url", Url);
+            sharedPreferences.edit().commit();
 
         } else {
             Url = intent.getStringExtra("city_url");
@@ -118,6 +121,8 @@ public class weatherActivity extends Activity implements View.OnClickListener{
         refreshTime.setText(sharedPreferences.getString("publish_time", ""));
         weatherInfo.setText(sharedPreferences.getString("weather_info", ""));
         temperature.setText(sharedPreferences.getString("temp", ""));
+        intent = new Intent(weatherActivity.this, AutoUpdateWeather.class);
+        startService(intent);
     }
 
 
